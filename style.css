@@ -1,0 +1,73 @@
+.banner {
+  width: 1920px;
+  height: 250px;
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url(/image/banner01.png);
+  text-indent: -999px;
+}
+
+.inner {
+  width: 1300px;
+  margin: 0 auto;
+}
+
+.intro {
+  margin: 120px 0px;
+  text-align: center;
+}
+
+.write {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.write .btn_open {
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  background-color: #1f8dff2b;
+}
+
+.write .btn_open:hover {
+  background-color: #1f8bff00;
+  border: 2px solid #1f8dff2b;
+}
+
+.mypost {
+  display: none;
+  text-align: center;
+  width: 650px;
+  margin: 0px auto;
+  margin-bottom: 106px;
+}
+
+.mypost div {
+  margin-bottom: 16px;
+}
+
+#open_form.open_post .mypost {
+  display: block;
+}
+
+.cards {
+  text-align: center;
+  margin-bottom: 120px;
+}
+
+.col {
+  width: 400px;
+  height: 400px;
+  background-color: red;
+  margin: 28px 14px;
+  display: inline-block;
+}
+
+.col a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
