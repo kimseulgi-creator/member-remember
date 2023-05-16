@@ -137,6 +137,10 @@ h3 {
   width: 100px;
 }
 
+.user_comment_input {
+  width: 600px;
+}
+
 #comment .comment_input {
   width: 600px;
   margin: 0 auto;

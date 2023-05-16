@@ -49,8 +49,8 @@ function listing() {
               <h3>Comment</h3>
               <div>
                 <input class="name_input" for="" placeholder="Name"></input>
-                <input class="comment_input" for="" placeholder="Comment"></input>
-                <button>작성</button>
+                <input class="user_comment_input" for="" placeholder="Comment"></input>
+                <button onclick="comment_post()">작성</button>
               </div>
             </div>
             <div id="comments">
@@ -60,15 +60,33 @@ function listing() {
       </div>`;
         $('#cards-box').append(temp_html);
       });
+    });
 
+  fetch('/comment')
+    .then((res) => res.json())
+    .then((data) => {
+      let rows = data['result'];
+
+      rows.forEach((b) => {
+        let name = b['user_name'];
+        let comment = b['user_comment'];
+
+        let temp_html = `<div class="comment_user">
+                              <p class="comment_name">${name}</p>
+                              <p class="comment_review">${comment}</p>
+                            </div>`
+
+        $('#comments').append(temp_html);
+      })
       $("#cards-box .introduce").hide();
     });
 }
 
 
+//초기 모달창 전부 닫기
 let introduce_hide = document.getElementsByClassName('introduce')
-console.log(introduce_hide)
 
+//모달창 열기
 function open_modal(name) {
   let str = name.split('+')
   let str_end = str[1]
@@ -76,6 +94,7 @@ function open_modal(name) {
   $(el).show();
 }
 
+//모달창 닫기
 function close_modal() {
   $("#cards-box .introduce").hide();
 }
@@ -101,6 +120,30 @@ function posting() {
     });
 }
 
+//포스팅 박스 열기
 function open_box() {
   $('#open_form').toggleClass("open_post")
+}
+
+//포스팅 박스 닫기
+function close_box() {
+  $('#open_form').removeClass("open_post")
+}
+
+//댓글 쓰기
+function comment_post() {
+  let user_name = $('.name_input').val();
+  let user_comment = $('.user_comment_input').val();
+  console.log(user_comment)
+
+  let formData = new FormData();
+  formData.append('user_name_give', user_name);
+  formData.append('user_comment_give', user_comment);
+
+  fetch('/comment', { method: 'POST', body: formData })
+    .then((res) => res.json())
+    .then((data) => {
+      alert(data['msg']);
+      window.location.reload();
+    });
 }
