@@ -8,16 +8,76 @@ function listing() {
     .then((data) => {
       let rows = data['result'];
       $('#cards-box').empty();
+
+      let n = 0;
+
       rows.forEach((a) => {
         let image = a['image'];
         let name = a['name'];
         let mbti = a['mbti'];
         let blog = a['blog'];
 
-        let temp_html = `<div class="col"><a href=""><img src="${image}" alt=""></a></div>`;
+        n++;
+
+        let temp_html = `
+        <div class="col">
+          <a role="button" onclick="open_modal('${name}+${n - 1}')">
+           <img src="${image}" alt="">
+          </a>
+
+        </div>
+        <div class="introduce">
+        <button onclick="close_modal()">x</button>
+        <div class="wrap">
+          <img src="${image}" alt="">
+          <div class="contents">
+            <div>
+              <h3>Name</h3>
+              <p>${name}</p>
+            </div>
+            <div>
+              <h3>MBTI</h3>
+              <p>${mbti}</p>
+            </div>
+            <div>
+              <h3>Blog</h3>
+              <p>${blog}</p>
+            </div>
+          </div>
+          <div id="comment">
+            <div class="comment_input">
+              <h3>Comment</h3>
+              <div>
+                <input class="name_input" for="" placeholder="Name"></input>
+                <input class="comment_input" for="" placeholder="Comment"></input>
+                <button>작성</button>
+              </div>
+            </div>
+            <div id="comments">
+            </div>
+          </div>
+        </div>
+      </div>`;
         $('#cards-box').append(temp_html);
       });
+
+      $("#cards-box .introduce").hide();
     });
+}
+
+
+let introduce_hide = document.getElementsByClassName('introduce')
+console.log(introduce_hide)
+
+function open_modal(name) {
+  let str = name.split('+')
+  let str_end = str[1]
+  let el = document.getElementsByClassName('introduce')[str_end];
+  $(el).show();
+}
+
+function close_modal() {
+  $("#cards-box .introduce").hide();
 }
 
 //웹에서 포스팅 부분(쓰기)
