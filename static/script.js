@@ -2,6 +2,7 @@ $(document).ready(function () {
   listing();
 });
 
+//카드 불러오기
 function listing() {
   fetch('/intro')
     .then((res) => res.json())
@@ -21,10 +22,13 @@ function listing() {
 
         let temp_html = `
         <div class="col">
-          <a role="button" onclick="open_modal('${name}+${n - 1}')">
-           <img src="${image}" alt="">
-          </a>
-
+         <img src="${image}" alt="">
+          <div class="info">
+            <h3>${name}</h3>
+            <a role="button" onclick="open_modal('${name}+${n - 1}')">
+              <img src="../static/image/icon01.png" alt="">
+            </a>
+          </div>
         </div>
         <div class="introduce">
         <button onclick="close_modal()">x</button>
@@ -50,7 +54,7 @@ function listing() {
               <div>
                 <input class="name_input" for="" placeholder="Name"></input>
                 <input class="user_comment_input" for="" placeholder="Comment"></input>
-                <button onclick="comment_post()">작성</button>
+                <button onclick="comment_post()" type="button" class="btn btn-primary ">작성</button>
               </div>
             </div>
             <div id="comments">
@@ -62,6 +66,17 @@ function listing() {
       });
     });
 
+  //댓글 작성 후 reload 된 뒤 카드에 마우스를 올리면 버튼보이기
+  $("#cards-box .col .info").on({
+    'mouseenter': function () {
+      $(this).animate({ "opacity": 1 }, 200);
+    },
+    'mouseleave': function () {
+      $(this).animate({ "opacity": 0 }, 200);
+    }
+  });
+
+  //댓글 불러오기
   fetch('/comment')
     .then((res) => res.json())
     .then((data) => {
@@ -78,13 +93,21 @@ function listing() {
 
         $('#comments').append(temp_html);
       })
-      $("#cards-box .introduce").hide();
+
+      //카드에 마우스를 올리면 버튼보이기
+      $("#cards-box .col .info").on({
+        'mouseenter': function () {
+          $(this).animate({ "opacity": 1 }, 200);
+        },
+        'mouseleave': function () {
+          $(this).animate({ "opacity": 0 }, 200);
+        }
+      });
     });
+
 }
 
 
-//초기 모달창 전부 닫기
-let introduce_hide = document.getElementsByClassName('introduce')
 
 //모달창 열기
 function open_modal(name) {
@@ -98,6 +121,8 @@ function open_modal(name) {
 function close_modal() {
   $("#cards-box .introduce").hide();
 }
+
+
 
 //웹에서 포스팅 부분(쓰기)
 function posting() {
@@ -145,5 +170,6 @@ function comment_post() {
     .then((data) => {
       alert(data['msg']);
       window.location.reload();
+
     });
 }

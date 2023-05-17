@@ -1,11 +1,14 @@
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 h3 {
   font-family: 'Playfair Display', serif;
 }
 
 .banner {
-  width: 1920px;
+  width: 100%;
   height: 250px;
-  background-color: red;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +23,27 @@ h3 {
 
 .intro {
   margin: 120px 0px;
-  text-align: center;
+}
+
+.intro img {
+  background-color: red;
+  width: 48%;
+  height: 500px;
+}
+
+.intro p {
+  width: 35%;
+  display: inline-block;
+  margin-left: 110px;
+  line-height: 3;
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+.intro p span {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  color: #5e96cb;
 }
 
 .write {
@@ -70,30 +93,53 @@ h3 {
   height: 400px;
   margin: 28px 14px;
   display: inline-block;
+  position: relative;
 }
 
-.col a {
-  display: block;
+.col img {
+  width: 100%;
+}
+
+.col .info {
   width: 100%;
   height: 100%;
+  opacity: 0;
+  -webkit-backdrop-filter: blur(2px);
+  -mos-backdrop-filter: blur(2px);
+  -ms-backdrop-filter: blur(2px);
+  -o-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.8s;
+  position: absolute;
+  top: 0;
 }
 
-.col a img {
-  width: 100%;
+.col .info h3 {
+  color: white;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin-top: 100px;
 }
 
-
+.col .info a {
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+  margin-top: 35px;
+}
 
 #cards-box .introduce {
-  /*display: none;*/
+  display: none;
   position: absolute;
-  top: 1000px;
+  top: 1650px;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 1000px;
   background-color: #b3d8ff;
   border-radius: 15px;
   box-shadow: 3px 3px 10px 0px #0000007d;
+  z-index: 1;
 }
 
 #cards-box .introduce>button {
@@ -125,13 +171,36 @@ h3 {
 
 #cards-box .introduce .contents div {
   display: block;
-  height: 130px;
+  height: 140px;
 }
 
 #cards-box .introduce .contents div h3 {
   font-size: 36px;
   margin-bottom: 20px;
 }
+
+#cards-box .introduce .contents div p {
+  font-size: 18px;
+  margin-bottom: 0px;
+  overflow: auto;
+  color: #516076;
+}
+
+#cards-box .introduce .contents div p::-webkit-scrollbar {
+  height: 5px;
+}
+
+#cards-box .introduce .contents div p::-webkit-scrollbar-thumb {
+  background-color: #0d6efd;
+}
+
+#cards-box .introduce .contents div p::-webkit-scrollbar-track {
+  background-color: #dcdcdc;
+  border-radius: 10px;
+}
+
+
+
 
 .name_input {
   width: 100px;
@@ -159,10 +228,9 @@ h3 {
 
 #comment .comment_input>div button {
   width: 80px;
-}
-
-#cards-box .introduce .contents div p {
-  font-size: 18px;
+  height: 30px;
+  line-height: 15px;
+  margin-left: 10px;
 }
 
 #comment {
